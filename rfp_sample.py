@@ -1,8 +1,21 @@
 import pandas as pd
 
+print('Made by 전성민')
+print('')
+print('본 exe 파일과 같은 폴더에 같은 이름의 [RFP txt파일]과 [비어있는 xlsx파일]이 존재해야됩니다!')
+print('예) rfp_law.txt, rfp_law.xlsx')
+print('자세한 설명은 설명서를 참고해주세요!')
+print('')
+
+name = input('파일명을 입력해주세요(English): ')
+print('')
+print('변환이 끝나면 자동으로 종료됩니다..')
+print('')
+print('')
+
 try:        
-    excel_name = 'rfp_sample.xlsx'
-    f = open('rfp_sample.txt', 'r', encoding='UTF8')    
+    excel_name = name + '.xlsx'
+    f = open(name + '.txt', 'r', encoding='UTF8')    
 
     new_data = {}
     store = ''
