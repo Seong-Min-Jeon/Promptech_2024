@@ -15,7 +15,7 @@ print('')
 
 try:        
     excel_name = name + '.xlsx'
-    f = open(name + '.txt', 'r', encoding='UTF8')    
+    f = open(name + '.txt', 'r', encoding='UTF8')
 
     new_data = {}
     store = ''
@@ -23,7 +23,8 @@ try:
     desc_lines = []
 
     while True:
-        line = f.readline()        
+        line = f.readline()                
+
         if not line:
             break
 
@@ -52,8 +53,10 @@ try:
             desc_lines = []
 
         elif line.strip() == '요구사항 명칭':
+            if '\n' in store:
+                store = store.split('\n')[1]
             new_data['요구사항 고유번호'] = [store]
-            store = ''
+            store = ''        
         elif line.strip() == '요구사항 분류':
             new_data['요구사항 명칭'] = [store]
             store = ''
@@ -73,25 +76,25 @@ try:
             desc = store
             
             #세부내용 통으로 묶어야될 때 주석처리
-            if(desc[0] == 'ㅇ' or desc[0] == '◦' or desc[0] == 'o'):
-                desc = '○' + desc[1:]
-            desc = desc.replace('\nㅇ', '\n○').replace('\n◦', '\n○').replace('\no', '\n○').replace('\n○', '\n○') 
-            desc_lines = desc.split('\n○')
-            for i in range(len(desc_lines)-1):
-                desc_lines[i+1] = '○' + desc_lines[i+1]
-            new_data['세부 내용'] = [desc_lines[0]]    
+            # if(desc[0] == 'ㅇ' or desc[0] == '◦' or desc[0] == 'o'):
+            #     desc = '○' + desc[1:]
+            # desc = desc.replace('\nㅇ', '\n○').replace('\n◦', '\n○').replace('\no', '\n○').replace('\n○', '\n○') 
+            # desc_lines = desc.split('\n○')
+            # for i in range(len(desc_lines)-1):
+            #     desc_lines[i+1] = '○' + desc_lines[i+1]
+            # new_data['세부 내용'] = [desc_lines[0]]    
 
             #세부내용 나눌 때 주석처리
-            # new_data['세부 내용'] = [desc]         
+            new_data['세부 내용'] = [desc]         
             store = ''
         elif line.strip() == '관련 요구사항':
             new_data['산출정보'] = [store]
             store = ''        
         else:
             if store == '':
-                store += line.rstrip()
+                store += line.rstrip()               
             else:
-                store += '\n' + line.rstrip()
+                store += '\n' + line.rstrip()    
 
     print(new_data.get('요구사항 고유번호'), "------ 작업 완료")
 
