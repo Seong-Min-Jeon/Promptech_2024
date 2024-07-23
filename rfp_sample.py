@@ -30,8 +30,8 @@ try:
 
         if line == '' and len(new_data) == 6:
             pass
-            
-        if line.strip() == '요구사항 고유번호':                    
+
+        if line.replace(" " , "").strip() == '요구사항고유번호':                   
             store = ''
             
             if(new_data.get('요구사항 고유번호') != None):
@@ -52,27 +52,27 @@ try:
             new_data = {}       
             desc_lines = []
 
-        elif line.strip() == '요구사항 명칭':
+        elif line.replace(" " , "").strip() == '요구사항명칭':
             if '\n' in store:
                 store = store.split('\n')[1]
             new_data['요구사항 고유번호'] = [store]
             store = ''        
-        elif line.strip() == '요구사항 분류':
+        elif line.replace(" " , "").strip() == '요구사항분류':
             new_data['요구사항 명칭'] = [store]
             store = ''
-        elif line.strip() == '요구사항':
+        elif line.replace(" " , "").strip() == '요구사항':
             new_data['요구사항 분류'] = [store]
             store = ''
-        elif line.strip() == '상세설명':
+        elif line.replace(" " , "").strip() == '상세설명':
             pass
-        elif line.strip() == '정의':
+        elif line.replace(" " , "").strip() == '정의':
             pass
-        elif line.strip() == '세부' or line.strip() == '세부내용':
+        elif line.replace(" " , "").strip() == '세부' or line.replace(" " , "").strip() == '세부내용':
             new_data['정의'] = [store]
             store = ''
-        elif line.strip() == '내용' or line.strip() == '규격':
+        elif line.replace(" " , "").strip() == '내용' or line.replace(" " , "").strip() == '규격':
             pass
-        elif line.strip() == '산출정보':
+        elif line.replace(" " , "").strip() == '산출정보':
             desc = store
             
             #세부내용 통으로 묶어야될 때 주석처리
@@ -87,7 +87,7 @@ try:
             #세부내용 나눌 때 주석처리
             new_data['세부 내용'] = [desc]         
             store = ''
-        elif line.strip() == '관련 요구사항':
+        elif line.replace(" " , "").strip() == '관련요구사항':
             new_data['산출정보'] = [store]
             store = ''        
         else:
